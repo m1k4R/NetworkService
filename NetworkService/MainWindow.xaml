@@ -1,0 +1,215 @@
+﻿<Window x:Class="NetworkService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkService"
+        mc:Ignorable="d"
+        Title="Network Service" Height="740" Width="1384" Background="White" KeyUp="Window_KeyUp">
+    <Window.Resources>
+        <Color x:Key="ColorBar">#FF3D5F7B</Color>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-3">
+        <Grid.Background>
+            <ImageBrush ImageSource="images/img12.jpg"/>
+        </Grid.Background>
+
+        <Rectangle Fill="Black" Opacity="0.3"  HorizontalAlignment="Left" Height="339" Margin="10,6,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="694"/>
+
+        <DataGrid x:Name="dataGridTable" ItemsSource="{Binding Lista}" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" HorizontalAlignment="Left" Height="281" Margin="155,15,0,0" VerticalAlignment="Top" Width="542" Background="White" Opacity="0.7" Foreground="#FF1E3A51">
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF607A8F"/>
+                            <Setter Property="Foreground" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="*" FontSize="16" Foreground="#FF1E3A51" IsReadOnly="True" Binding="{Binding Id}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Name" Width="*" FontSize="16" Foreground="#FF1E3A51" IsReadOnly="True" Binding="{Binding Name}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Type" Width="*" FontSize="16" Foreground="#FF1E3A51" IsReadOnly="True" Binding="{Binding Type.Name}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Value" Width="*" FontSize="16" Foreground="#FF1E3A51" IsReadOnly="True" Binding="{Binding Path=Mvalue, Mode=OneWay}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" Height="33" Margin="17,263,0,0" VerticalAlignment="Top" Width="113" Click="buttonSearch_Click"/>
+        <Button x:Name="buttonReset" Content="Reset" HorizontalAlignment="Left" Height="33" Margin="17,301,0,0" VerticalAlignment="Top" Width="113" Click="buttonReset_Click"/>
+        <RadioButton x:Name="rbtName" Content="Name" HorizontalAlignment="Left" Height="24" Margin="17,112,0,0" VerticalAlignment="Top" Width="113" FontSize="14" Foreground="White"/>
+        <RadioButton x:Name="rbtType" Content="Type" HorizontalAlignment="Left" Height="28" Margin="17,141,0,0" VerticalAlignment="Top" Width="112" FontSize="14" Foreground="White"/>
+        <Label x:Name="labelSearch" Content="Search" HorizontalAlignment="Left" Height="28" Margin="17,15,0,0" VerticalAlignment="Top" Width="113" FontSize="14" Background="#FF3D5F7B" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="textBoxSearch" Background="White" Opacity="0.7" HorizontalAlignment="Left" Height="27" Margin="17,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113" FontSize="14"/>
+        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Height="33" Margin="274,301,0,0" VerticalAlignment="Top" Width="112" Click="buttonAdd_Click"/>
+        <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Height="33" Margin="420,301,0,0" VerticalAlignment="Top" Width="112" Click="buttonDelete_Click"/>
+        <Rectangle Fill="#FFCFCFCF" HorizontalAlignment="Left" Height="318" Margin="140,16,0,0" Stroke="#FFB0B0B0" VerticalAlignment="Top" Width="6"/>
+
+        <Rectangle Fill="Black" Opacity="0.3"  HorizontalAlignment="Left" Height="339" Margin="10,352,0,0" Stroke="Transparent" VerticalAlignment="Top" Width="694"/>
+        <Canvas Name="canvas" HorizontalAlignment="Left" Height="317" Margin="155,362,0,0" VerticalAlignment="Top" Width="539" Background="Transparent">
+            <Canvas Name="canvas1" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="2">
+                <TextBlock Background="Transparent"  TextAlignment="Center" Width="133" Canvas.Top="61" Foreground="White" FontWeight="Bold"/>
+                <Button Name="x1" Visibility="Hidden" Content="x" Height="20" Canvas.Left="111" Width="20" Click="x1_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas2" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="135" Canvas.Top="2">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61" Height="14"/>
+                <Button Name="x2" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x2_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas3" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="270" Canvas.Top="2">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x3" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x3_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas4" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="405" Canvas.Top="2">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x4" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x4_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas5" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="81">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x5" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x5_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas6" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="81" Canvas.Left="135">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x6" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x6_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas7" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="270" Canvas.Top="81">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x7" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x7_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas8" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="405" Canvas.Top="81">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x8" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x8_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas9" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="160">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x9" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x9_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas10" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="160" Canvas.Left="135">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x10" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x10_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas11" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="270" Canvas.Top="160">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Height="16" Canvas.Top="61"/>
+                <Button Name="x11" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x11_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas12" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="405" Canvas.Top="160">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x12" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x12_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas13" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="239">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x13" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x13_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas14" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Top="239" Canvas.Left="135">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x14" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x14_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas15" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="270" Canvas.Top="239">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x15" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x15_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+            <Canvas Name="canvas16" Height="63" Width="111" Background="Transparent" Drop="drop" AllowDrop="True" DragOver="dragOver" Canvas.Left="405" Canvas.Top="239">
+                <TextBlock Background="Transparent" TextAlignment="Center" Width="133" Canvas.Top="61"/>
+                <Button Name="x16" Visibility="Hidden" Content="x" Height="20" Canvas.Left="113" Width="20" Click="x16_Click" Foreground="White" Background="#FFC94444" BorderBrush="Transparent"/>
+            </Canvas>
+        </Canvas>
+
+
+        <ListBox x:Name="listBoxMjeraci" ItemsSource="{Binding ListaCanvas}" Background="White" Opacity="0.7" HorizontalAlignment="Left" Height="317" Margin="17,362,0,0" VerticalAlignment="Top" Width="123"  MouseLeftButtonUp="ListView_MouseLeftButtonUp" SelectionChanged="ListView_SelectionChanged" Foreground="#FF304A5F" FontWeight="Bold">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Height="15" Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Rectangle Fill="Black" Opacity="0.3"  HorizontalAlignment="Left" Height="339" Margin="709,6,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="401"/>
+        <Rectangle Fill="#FFCFCFCF" HorizontalAlignment="Left" Height="6" Margin="722,54,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="377"/>
+        <ComboBox x:Name="comboBoxObject" ItemsSource="{Binding Lista}" DisplayMemberPath="Name" HorizontalAlignment="Left" Height="28" Margin="841,16,0,0" VerticalAlignment="Top" Width="122"/>
+        <Button x:Name="buttonShow" Content="Show" HorizontalAlignment="Left" Height="33" Margin="986,14,0,0" VerticalAlignment="Top" Width="113" Click="buttonShow_Click"/>
+        <Label x:Name="labelObject" Content="Object" HorizontalAlignment="Left" Height="28" Margin="722,15,0,0" VerticalAlignment="Top" Width="102" FontSize="14" Foreground="White" FontWeight="Bold">
+            <Label.Background>
+                <SolidColorBrush Color="#FF3D5F7B"/>
+            </Label.Background>
+        </Label>
+
+        <Grid HorizontalAlignment="Left" Height="269" Margin="722,65,0,0" VerticalAlignment="Top" Width="377" Background="White" Opacity="0.7">
+            <Label x:Name="labelDetails" Content="Details :" HorizontalAlignment="Left" Height="27" VerticalAlignment="Top" Width="100" Foreground="#FF284A66" FontSize="16" FontWeight="Bold"/>
+            <Rectangle Fill="#FF71777B" HorizontalAlignment="Left" Height="2" Margin="4,25,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="126"/>
+            <Label x:Name="labelI" Visibility="Hidden" Content="Id :" HorizontalAlignment="Left" Height="27" Margin="4,32,0,0" VerticalAlignment="Top" Width="55" Foreground="#FF3D5F7B" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="labelN" Visibility="Hidden" Content="Name :" HorizontalAlignment="Left" Height="27" Margin="4,64,0,0" VerticalAlignment="Top" Width="55" Foreground="#FF3D5F7B" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="labelT" Visibility="Hidden" Content="Type :" HorizontalAlignment="Left" Height="27" Margin="4,96,0,0" VerticalAlignment="Top" Width="55" Foreground="#FF3D5F7B" FontWeight="Bold" FontSize="14"/>
+            <Label x:Name="labelId" Content="" HorizontalAlignment="Left" Height="27" Margin="59,32,0,0" VerticalAlignment="Top" Width="187" Foreground="#FF315672" FontSize="14"/>
+            <Label x:Name="labelName" Content="" HorizontalAlignment="Left" Height="27" Margin="59,64,0,0" VerticalAlignment="Top" Width="187" Foreground="#FF315672" FontSize="14"/>
+            <Label x:Name="labelType" Content="" HorizontalAlignment="Left" Height="27" Margin="59,96,0,0" VerticalAlignment="Top" Width="187" Foreground="#FF315672" FontSize="14"/>
+            <TextBox x:Name="textBoxValues" IsReadOnly="True"  HorizontalAlignment="Left" Height="131" Margin="72,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="260" BorderBrush="{x:Null}" Foreground="#FF315672"/>
+            <Image x:Name="imageObj" HorizontalAlignment="Left" Height="97" Margin="251,25,0,0" VerticalAlignment="Top" Width="116"/>
+            <Label x:Name="labelV" Visibility="Hidden" Content="Values :" HorizontalAlignment="Left" Height="27" Margin="4,128,0,0" VerticalAlignment="Top" Width="68" Foreground="#FF3D5F7B" FontWeight="Bold" FontSize="14"/>
+
+        </Grid>
+
+        <Rectangle Fill="Black" Opacity="0.3" HorizontalAlignment="Left" Height="339" Margin="709,352,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="401"/>
+
+        <Rectangle Fill="Black" Opacity="0.3" HorizontalAlignment="Left" Height="685" Margin="1115,6,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="251"/>
+        <TextBox x:Name="textBoxReport" Background="White" Opacity="0.7" IsReadOnly="True" HorizontalAlignment="Left" Height="627" Margin="1123,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="233" FontSize="14" Foreground="#FF1E3B53"/>
+        <Label x:Name="labelReport" Content="Report" HorizontalAlignment="Left" Height="28" Margin="1123,15,0,0" VerticalAlignment="Top" Width="233" FontSize="14" Background="#FF3D5F7B" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="buttonReport" Content="" BorderBrush="Transparent" HorizontalAlignment="Left" Height="28" Margin="1310,15,0,0" VerticalAlignment="Top" Width="26" FontSize="14" RenderTransformOrigin="0.5,-0.024" Click="buttonReport_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="images/down.png"/>
+            </Button.Background>
+        </Button>
+
+
+        <Rectangle Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="315" Margin="286,364,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="3"/>
+        <Rectangle Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="315" Margin="422,364,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="3"/>
+        <Rectangle Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="315" Margin="558,364,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="3"/>
+        <Rectangle Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="3" Margin="155,441,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="539"/>
+        <Rectangle Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="3" Margin="155,519,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="539"/>
+        <Rectangle Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="3" Margin="158,599,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="539"/>
+        <Rectangle Name="rtn1" Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="315" Margin="155,364,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="3"/>
+        <Rectangle Name="rtn2" Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="315" Margin="691,364,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="3"/>
+        <Rectangle Name="rtn3" Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="3" Margin="155,364,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="539"/>
+        <Rectangle Name="rtn4" Fill="#FF8D9BA4" HorizontalAlignment="Left" Height="3" Margin="155,676,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="539"/>
+        <Canvas Name="CanvasBar" HorizontalAlignment="Left" Height="317" Margin="722,362,0,0" VerticalAlignment="Top" Width="377">
+            <Canvas.Background>
+                <SolidColorBrush Color="White" Opacity="0.7"/>
+            </Canvas.Background>
+        </Canvas>
+
+
+
+    </Grid>
+</Window>

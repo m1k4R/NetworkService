@@ -1,0 +1,26 @@
+﻿<Window x:Class="NetworkService.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkService"
+        mc:Ignorable="d"
+        Title="Add new object" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStyle="None" Height="221.964" Width="373.475">
+    <Grid Margin="0,0,-8,-8" Background="#FF697985">
+        <Label x:Name="labelID" Content="ID :" HorizontalAlignment="Left" Height="29" Margin="10,68,0,0" VerticalAlignment="Top" Width="59" FontSize="14" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="labelName" Content="Name :" HorizontalAlignment="Left" Height="29" Margin="10,113,0,0" VerticalAlignment="Top" Width="59" FontWeight="Bold" FontSize="14" Foreground="White"/>
+        <Label x:Name="labelType" Content="Type :" HorizontalAlignment="Left" Height="29" Margin="10,23,0,0" VerticalAlignment="Top" Width="59" FontWeight="Bold" FontSize="14" Foreground="White"/>
+        <TextBox x:Name="textBoxID" HorizontalAlignment="Left" Height="29" Margin="82,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" FontSize="14" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="29" Margin="82,113,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="144" FontSize="14" BorderBrush="{x:Null}"/>
+        <ComboBox x:Name="comboBoxType" HorizontalAlignment="Left" Height="29" Margin="82,23,0,0" VerticalAlignment="Top" Width="144" SelectionChanged="comboBoxType_SelectionChanged"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="119" Margin="243,23,0,0" VerticalAlignment="Top" Width="115"/>
+        <Button x:Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Height="27" Margin="47,173,0,0" VerticalAlignment="Top" Width="108" Click="buttonAdd_Click"/>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" Height="27" Margin="205,173,0,0" VerticalAlignment="Top" Width="108" Click="buttonCancel_Click"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="3" Margin="6,157,0,0" Stroke="Transparent" StrokeThickness="1" VerticalAlignment="Top" Width="338"/>
+        <Label x:Name="labelTypeGreska" Content="" HorizontalAlignment="Left" Height="25" Margin="83,48,0,0" VerticalAlignment="Top" Width="144" Foreground="White" FontSize="11"/>
+        <Label x:Name="labelIdGreska" Content="" HorizontalAlignment="Left" Height="25" Margin="83,93,0,0" VerticalAlignment="Top" Width="144" Foreground="White" FontSize="11"/>
+        <Label x:Name="labelNameGreska" Content="" HorizontalAlignment="Left" Height="25" Margin="83,137,0,0" VerticalAlignment="Top" Width="144" Foreground="White" FontSize="11"/>
+
+
+    </Grid>
+</Window>
